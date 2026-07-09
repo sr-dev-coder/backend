@@ -9,6 +9,7 @@ const validate = (DtoClass) =>{
        }
 
        req.body = value
+       
        next()
     }
 }
