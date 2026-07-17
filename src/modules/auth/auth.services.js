@@ -9,14 +9,14 @@ const register = async ({ name, email, password }) =>{
 
     const { rawToken, hashedToken } = generateResetToken()
 
-    const user = await User.create({
+    const user = await User.create({ 
         name,
         email,
         password,
         role,
         verificationToken: hashedToken
     })
-
+ 
     const userObj = user.toObject()
     delete userObj.password
     delete userObj.verificationToken
