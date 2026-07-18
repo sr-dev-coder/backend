@@ -89,6 +89,14 @@ const logout = async({ userId }) =>{
     await User.findByIdAndUpdate(userId, { refreshToken: null })
 }
 
+const getMe = async ({ userId }) =>{
+    const user = await User.findById(userId)
+
+    if(!user) throw ApiError.notFound("User does not exist")
+
+    return user.toObject()
+}
+
 const forgotPassword = async ({ email }) =>{
     const user = await User.findOne({ email })
     if(!user){
@@ -140,4 +148,4 @@ const verifyEmail = async ({ token }) =>{
     await user.save({ validateBeforeSave: false })
 }
 
-export { register, login, refresh, logout, forgotPassword, resetPassword, verifyEmail }
+export { register, login, refresh, logout, getMe, forgotPassword, resetPassword, verifyEmail }

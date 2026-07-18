@@ -21,6 +21,11 @@ const logout = async (req, res) => {
     ApiResponse.ok(res, "Logout successful.")
 }
 
+const getMe = async (req, res) => {
+    const user = await authService.getMe({ userId: req.user.id })
+    ApiResponse.ok(res, "User fetched successfully.", user)
+}
+
 const forgotPassword = async (req, res) => {
     await authService.forgotPassword(req.body)
     ApiResponse.ok(res, "Password reset email sent.")
@@ -36,4 +41,4 @@ const verifyEmail = async (req, res) => {
     ApiResponse.ok(res, "Email verified successfully.")
 }
 
-export { register, login, refresh, logout, forgotPassword, resetPassword, verifyEmail }
+export { register, login, refresh, logout, getMe, forgotPassword, resetPassword, verifyEmail }
